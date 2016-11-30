@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My name</title>
+</head>
+<body>
+
+<table border="1">
+    <tr>
+        <th>Tytuł</th>
+        <th>Autor</th>
+        <th>Data publikacji</th>
+        <th>Stan magazynowy</th>
+        <th><b>CENA</b></th>
+    </tr>
+    {% for item in book_list %}
+    <tr>
+        <td>{{ item.title }}</td>
+        <td>{{ item.author }}</td>
+        <td>{{ item.publish_date }}</td>
+        <td>{{ item.stock }}</td>
+      <td> <b> <i>{{ item.price }}</b>  </i> </td>
+
+    </tr>
+    {% endfor %}
+</table>
+<br>
+„You have {{ book_count }} {% if book_count > 1 %} books {% else %} book {% endif %} in Your store”
+
+
+</body>
+</html>

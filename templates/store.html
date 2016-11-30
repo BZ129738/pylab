@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Store</h1>
+{% if user.is_authenticated %}
+
+    {% if user.last_name %}
+       <p>Witaj {{ user.first_name }} {{ user.last_name }} !</p>
+    {% else %}
+        <p>Witaj {{ user.get_username }}!</p>
+   {% endif %}
+
+{% endif %}
+
+{% endblock content %}
