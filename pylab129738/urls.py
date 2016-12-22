@@ -15,11 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from rest_framework import routers
+
+from store import views
+
+router = routers.DefaultRouter()
+router.register(r'groups',views.GroupViewSet)
+router.register(r'users',views.GroupViewSet)
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^data/', include('data.urls')),
     url(r'^store/', include('store.urls')),
     #url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^accounts/', include('registration.backends.default.urls'))
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

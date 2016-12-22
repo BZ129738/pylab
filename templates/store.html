@@ -3,14 +3,53 @@
 {% block content %}
 
     <h1>Store</h1>
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
 
-    {% if user.last_name %}
-       <p>Witaj {{ user.first_name }} {{ user.last_name }} !</p>
+        {% if user.last_name %}
+            <p>Witaj {{ user.first_name }} {{ user.last_name }} !</p>
+        {% else %}
+            <p>Witaj {{ user.get_username }}!</p>
+        {% endif %}
+
+
+    <br>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Marka</th>
+            <th>Nazwa</th>
+            <th>Rozmiar</th>
+            <th>Opis</th>
+            <th><b>CENA</b></th>
+        </tr>
+        {% for item in Buty %}
+            <tr>
+                <td>{{ item.brand }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.size }}</td>
+                <td>{{ item.description }}</td>
+                <td><b><i>{{ item.price }}</i></b></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="row">
+        {% for item in Buty %}
+            <div class="col-xs-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/300x200" alt="test">
+                    <div class="caption">
+                        <h3>{{ item.brand }} {{ item.name }} </h3>
+                        <p>{{ item.description }}</p>
+                        <p><span>Rozmiar:</span> <span><b>{{ item.size }}</b></span></p>
+                        <h2><span>Cena:</span> <span>{{ item.price }}</span> <span>PLN</span></h2>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     {% else %}
-        <p>Witaj {{ user.get_username }}!</p>
-   {% endif %}
-
+        <p>Zaloguj się aby obejrzeć zawartość tej strony. Nie masz konta ? <a href="{% url 'registration_register' %}">Zarejestruj się za darmo tutaj</a>.</p>
 {% endif %}
 
 {% endblock content %}

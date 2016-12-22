@@ -29,6 +29,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'store',
+    'registration',
+    'bootstrap3',
+    'bootstrap_themes',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'data',
-    'store',
-    'registration',
+    'social.apps.django_app.default',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +53,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser'
+    ]
+}
 
 ROOT_URLCONF = 'pylab129738.urls'
 
@@ -64,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',  # FACEBOOK OAUTH CONTEXT PROCESSOR
+                'social.apps.django_app.context_processors.login_redirect',  # FACEBOOK OAUTH CONTEXT PROCESSOR
             ],
         },
     },
@@ -132,3 +146,24 @@ EMAIL_HOST = 'mailtrap.io'
 EMAIL_HOST_USER = '77e44c76782f69'
 EMAIL_HOST_PASSWORD = 'e97f1b150a6191'
 EMAIL_PORT = '2525'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = '970518913091819'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c97ea53d8faf95aae39eb6fc728a6880'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='178178450302-9d827jg22o7gt1pglieq6n4b76qo62da.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'DZjZorvde3egTsiR0YzHImNN'
+SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+'https://www.googleapis.com/auth/userinfo.email',
+'https://www.googleapis.com/auth/userinfo.profile'
+]
+
+SOCIAL_AUTH_TWITTER_KEY = 'ToLiQyBIRglkk3oIpm9fyF7YV'
+SOCIAL_AUTH_TWITTER_SECRET = 'xsEKHwVLfOW3zK2EXEKDgc7vVAhpfCdsxBEWXd4ZeP774bZlUu'

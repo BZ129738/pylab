@@ -1,0 +1,28 @@
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
+.bold_text {
+    font-weight: bold;
+}
+
+.hard_corner {
+    border-radius: 0;
+}
+
+.navbar-inverse .navbar-text {
+    color: #fffdfd;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fffdfd;
+    font-family: "Pacifico", cursive;
+    font-size: x-large
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: #FF9800;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+}

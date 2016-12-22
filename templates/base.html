@@ -1,10 +1,82 @@
-{% load staticfiles %}
-<html>
-    <head>
+{% extends 'bootstrap3/bootstrap3.html' %}
 
-    </head>
-    <body>
+{% load staticfiles %}
+
+{% load bootstrap3 %}
+
+{% load bootstrap_themes %}
+
+
+{% bootstrap_styles theme='simplex' type='min.css' %}
+
+{% block bootstrap3_extra_head %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link href="{% static 'base/style.css' %}" rel="stylesheet"/>
+
+{% endblock %}
+
+
+
+{% block bootstrap3_content %}
+
+    <!-- navbar -->
+    {% block navbar %}
+
+        <nav class="navbar navbar-inverse hard_corner" style="margin-top: 20px;margin-left: 20px;margin-right: 20px">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/store/">Store</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/store/">Strona główna</a></li>
+                    </ul>
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li> <span>
+                    {% if user.last_name %}
+                        <p class="navbar-text">Witaj {{ user.first_name }} {{ user.last_name }} !</p>
+                    {% else %}
+                        <p class="navbar-text">Witaj {{ user.get_username }}!</p>
+                    {% endif %} </span>
+                            </li>
+                            <li><a href="{% url 'auth_logout' %}" class="bold_text">Wyloguj</a></li>
+                        {% else %}
+                            <li><a href="{% url 'auth_login' %}" class="bold_text">Zaloguj</a></li>
+                            <li><a href="{% url 'registration_register' %}">Zarejestruj</a></li>
+                        {% endif %}
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+    {% endblock %}
+
+
+    <div class="container">
+        <!-- content -->
         {% block content %}
         {% endblock %}
-    </body>
-</html>
+
+    </div><!-- /.container -->
+
+
+{% endblock %}
+
+
+
+
+
+

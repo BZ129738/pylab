@@ -14,8 +14,9 @@ from store.models import Book, Buty
 class bookAdmin(admin.ModelAdmin):
     list_display = ("title", "author", "publish_date", "price", "stock")
 
+admin.site.register(Book,bookAdmin)
+
 class butyAdmin(admin.ModelAdmin):
     list_display = ("brand", "name", "description", "size", "price")
 
-admin.site.register(Book,bookAdmin)
 admin.site.register(Buty,butyAdmin)
